@@ -1,4 +1,56 @@
+@use './styles/abstractions' as *;
+
 .app {
-  height: 100%;
-  background-color: red;
+  min-height: 100%;
+  max-width: 120rem;
+  margin-inline: auto;
+  font-family: var(--ff-base);
+  color: var(--clr-text-light);
+  background-color: var(--clr-background-app-light);
+}
+
+.header {
+  @include shadow;
+  background-color: white;
+  padding-block: 1.5rem;
+  padding-inline: var(--space-app-side);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.header > h1 {
+  font-size: var(--fs-XL);
+  font-weight: var(--fw-extra-bold);
+}
+
+.header p {
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-semi-bold);
+}
+
+.main {
+  font-size: var(--fs-S);
+  background-color: var(--clr-background-app-light);
+  max-width: 110rem;
+  padding-inline: var(--space-app-side);
+  margin-inline: auto;
+  z-index: 0;
+}
+
+.mode_wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+
+  .svgWrapper {
+    width: 1rem;
+    @media (min-width: $breakpoint-small) {
+      width: 1.2rem;
+    }
+  }
+}
+
+@media (min-width: $breakpoint-small) {
 }

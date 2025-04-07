@@ -1,0 +1,65 @@
+@use '../../styles/abstractions' as *;
+
+.back_button {
+  color: var(--clr-text-light);
+  background-color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: fit-content;
+  padding: 0.4rem 24px;
+  margin-top: 40px;
+  margin-bottom: 64px;
+  filter: drop-shadow(0 0 5px var(--clr-shadow-light));
+
+  @media (min-width: $breakpoint-small) {
+    margin-block: 80px;
+    background-color: var(--clr-background-app-light);
+  }
+}
+
+.back_button:hover {
+  cursor: pointer;
+  font-weight: var(--fw-semi-bold);
+}
+
+.flag_wrapper {
+  width: 60%;
+  aspect-ratio: 2;
+}
+
+.text_section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.text_section ul > li > span {
+  font-weight: var(--fw-semi-bold);
+}
+
+.block_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.borders_block {
+}
+
+.border_text {
+  font-size: var(--fs-regular);
+  font-weight: var(--fw-semi-bold);
+}
+
+.buttons_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

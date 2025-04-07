@@ -1,0 +1,71 @@
+@use '../../styles/abstractions' as *;
+
+.input_section {
+  padding-block: 3rem;
+  background-color: var(--clr-background-app-light);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.input_wrapper {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+  @include shadow;
+
+  & input {
+    border: none;
+    padding-block: 12px;
+    padding-right: 24px;
+  }
+
+  & input:focus {
+    outline: none;
+  }
+
+  & .icon_wrapper {
+    width: 18px;
+    height: 18px;
+    margin-left: 32px;
+    margin-right: 24px;
+  }
+
+  & select {
+    height: 100%;
+    width: min-content;
+    padding-block: 12px;
+    border: none;
+    width: 200px;
+    padding-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+
+  & select:focus {
+    outline: none;
+  }
+}
+
+.input_wrapper:nth-of-type(2) {
+  width: fit-content;
+}
+
+.text_input {
+  max-width: 500px;
+}
+
+.cards_container {
+  display: grid;
+  place-content: center;
+  gap: 40px;
+
+  @media (min-width: $breakpoint-small) {
+    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 264px));
+    justify-content: space-between;
+    gap: 74px;
+  }
+}

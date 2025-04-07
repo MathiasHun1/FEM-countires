@@ -1,5 +1,43 @@
+@use './abstractions' as *;
+
 html,
 body,
 #root {
   height: 100%;
+}
+
+body {
+  background-color: var(--clr-background-app-light);
+}
+
+:root {
+  // Colors
+  --clr-background-app-light: hsla(0, 0%, 97%);
+  --clr-background-element-light: white;
+  --clr-shadow-light: hsla(0, 0%, 0%, 0.1);
+  --clr-text-light: hsl(200, 15%, 8%);
+
+  // Fonts
+  --ff-base: 'Nunito sans';
+
+  --fs-XL: calc(24rem / 16);
+  --fs-L: calc(18rem / 16);
+  --fs-regular: 1rem;
+  --fs-S: calc(14rem / 16);
+
+  --fw-regular: 400;
+  --fw-semi-bold: 600;
+  --fw-extra-bold: 800;
+
+  // Spacings
+  --space-app-side: 80px;
+}
+
+@media (max-width: $breakpoint-small) {
+  :root {
+    --space-app-side: 16px;
+
+    --fs-XL: calc(14rem / 16);
+    --fs-regular: calc(12rem / 16);
+  }
 }
