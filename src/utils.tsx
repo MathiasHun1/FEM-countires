@@ -1,7 +1,7 @@
-import { Country } from './types';
+import { CountryBase } from './types';
 
 export const filterByName = (
-  countries: Country[] | undefined,
+  countries: CountryBase[] | undefined,
   filterText: string
 ) => {
   if (!countries) return;
@@ -16,9 +16,9 @@ export const filterByName = (
 };
 
 export const filterByRegion = (
-  countries: Country[] | null,
+  countries: CountryBase[] | null,
   region: string
-): Country[] | undefined => {
+): CountryBase[] | undefined => {
   if (!countries) return;
 
   if (region === '') {
