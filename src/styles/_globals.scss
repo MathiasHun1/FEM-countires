@@ -7,15 +7,15 @@ body,
 }
 
 body {
-  background-color: var(--clr-background-app-light);
+  background-color: var(--clr-background-app);
 }
 
 :root {
   // Colors
-  --clr-background-app-light: hsla(0, 0%, 97%);
-  --clr-background-element-light: white;
-  --clr-shadow-light: hsla(0, 0%, 0%, 0.1);
-  --clr-text-light: hsl(200, 15%, 8%);
+  --clr-background-app: hsla(0, 0%, 97%);
+  --clr-background-element: white;
+  --clr-shadow: hsla(0, 0%, 0%, 0.1);
+  --clr-text: hsl(200, 15%, 8%);
 
   // Fonts
   --ff-base: 'Nunito sans';
@@ -31,6 +31,13 @@ body {
 
   // Spacings
   --space-app-side: 80px;
+}
+
+[data-theme='dark'] {
+  --clr-background-app: hsl(207, 26%, 17%);
+  --clr-background-element: hsl(209, 23%, 22%);
+  --clr-shadow: hsla(0, 0%, 0%, 0.1);
+  --clr-text: white;
 }
 
 @media (max-width: $breakpoint-small) {

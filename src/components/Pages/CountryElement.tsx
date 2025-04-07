@@ -14,11 +14,7 @@ const CountryElement = () => {
     if (country) {
       sevices.findByName(country).then((res) => setSelectedCountry(res));
     }
-  }, []);
-
-  useEffect(() => {
-    console.log(selectedCountry);
-  }, [selectedCountry]);
+  }, [country]);
 
   if (!selectedCountry) {
     return <div>Loading...</div>;
@@ -35,13 +31,13 @@ const CountryElement = () => {
 
       {!selectedCountry && <div>Loading...</div>}
       {selectedCountry && (
-        <div className={styles.data_container}>
+        <div className={styles.content_wrapper}>
           <div className={styles.flag_wrapper}>
             <img src={selectedCountry.flagImage} alt="" />
           </div>
 
           <div className={styles.text_section}>
-            <h2>{selectedCountry.name}</h2>
+            <h2 className={styles.name}>{selectedCountry.name}</h2>
             <div className={styles.block_container}>
               <ul>
                 <li>
@@ -93,9 +89,9 @@ const CountryElement = () => {
                 <p className={styles.border_text}>Border Countries: </p>
                 <div className={styles.buttons_container}>
                   {selectedCountry.borderCountries.map((c) => (
-                    <button key={c} className={styles.country_button}>
+                    <Link to={`/${c}`} key={c} className={styles.country_link}>
                       {c}
-                    </button>
+                    </Link>
                   ))}
                 </div>
               </nav>

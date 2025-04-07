@@ -2,7 +2,7 @@
 
 .input_section {
   padding-block: 3rem;
-  background-color: var(--clr-background-app-light);
+  background-color: var(--clr-background-app);
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -66,6 +66,6 @@
   @media (min-width: $breakpoint-small) {
     grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 264px));
     justify-content: space-between;
-    gap: 74px;
+    gap: 60px;
   }
 }

@@ -7,7 +7,7 @@ export interface CountryBase {
 }
 
 export interface CountryExtended extends CountryBase {
-  nativeName: string;
+  nativeName?: string;
   subregion?: string;
   domain: string;
   currencies: string[];

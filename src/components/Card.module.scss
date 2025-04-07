@@ -1,14 +1,14 @@
 .card {
   max-width: 264px;
   width: fit-content;
-  background-color: var(--clr-background-element-light);
-  box-shadow: 0px 3px 30px -10px var(--clr-shadow-light);
+  background-color: var(--clr-background-element);
+  box-shadow: 0px 3px 30px -10px var(--clr-shadow);
   border-radius: 5px;
   overflow: hidden;
 }
 
 .image_wrapper {
-  box-shadow: 0px 3px 18px -10px var(--clr-shadow-light);
+  box-shadow: 0px 3px 18px -10px var(--clr-shadow);
 
   & > img {
     width: 100%;
@@ -42,6 +42,6 @@
 }
 
 .link {
-  color: var(--clr-text-light);
+  color: var(--clr-text);
   text-decoration: none;
 }
