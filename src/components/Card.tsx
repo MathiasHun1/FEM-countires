@@ -1,8 +1,8 @@
 import styles from './Card.module.scss';
-import { Country } from '../types';
+import { CountryBase } from '../types';
 import { Link } from 'react-router';
 
-const Card = (props: Country) => {
+const Card = (props: CountryBase) => {
   const { name, population, region, capital, flagImage } = props;
 
   return (
