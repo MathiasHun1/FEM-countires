@@ -9,7 +9,7 @@ const Card = (props: CountryBase) => {
     <Link to={`/${name}`} className={styles.link}>
       <div className={styles.card}>
         <div className={styles.image_wrapper}>
-          <img src={flagImage} alt="" />
+          <img src={flagImage} alt={`Flag of ${name}`} />
         </div>
         <div className={styles.text_wrapper}>
           <h2 className={styles.title}>{name}</h2>

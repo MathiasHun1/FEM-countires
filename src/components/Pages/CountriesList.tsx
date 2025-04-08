@@ -10,9 +10,16 @@ const CountriesList = () => {
   const [countries, setCountries] = useState<CountryBase[] | null>(null);
   const [filterText, setFilterText] = useState('');
   const [filterOption, setFilterOption] = useState('');
+  const [isError, setIsError] = useState<boolean | null>(null);
 
   useEffect(() => {
-    services.getAllFiltered().then((res) => setCountries(res));
+    try {
+      services.getAllFiltered().then((res) => setCountries(res));
+      setIsError(false);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      setIsError(true);
+    }
   }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +49,10 @@ const CountriesList = () => {
       />
     ));
   };
+
+  if (isError) {
+    return <p>Error happened in loading data</p>;
+  }
 
   return (
     <>
