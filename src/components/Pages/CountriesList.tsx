@@ -61,14 +61,14 @@ const CountriesList = () => {
           <input
             type="text"
             name="search"
-            id=""
+            id="text"
             placeholder="Search for a country..."
             onChange={handleSearch}
           />
         </div>
 
         <div className={`${styles.input_wrapper} ${styles.select_input}`}>
-          <select name="select_region" id="" onChange={handleSelect}>
+          <select name="select_region" id="select" onChange={handleSelect}>
             <option value="">Filter by region</option>
             <option value="Africa">Africa</option>
             <option value="Americas">America</option>

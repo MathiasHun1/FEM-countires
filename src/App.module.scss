@@ -2,68 +2,16 @@
 
 .app {
   min-height: 100%;
-  max-width: 120rem;
-  margin-inline: auto;
   font-family: var(--ff-base);
   color: var(--clr-text);
   background-color: var(--clr-background-app);
   padding-bottom: 4rem;
 }
 
-.header {
-  @include shadow;
-  background-color: var(--clr-background-element);
-  padding-block: 1.5rem;
-  padding-inline: var(--space-app-side);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 10;
-}
-
-.header > h1 {
-  font-size: var(--fs-XL);
-  font-weight: var(--fw-extra-bold);
-}
-
-.header p {
-  font-size: var(--fs-regular);
-  font-weight: var(--fw-semi-bold);
-  @media (min-width: $breakpoint-large) {
-    font-size: calc(22rem / 16);
-  }
-}
-
 .main {
+  @include wrapper;
   font-size: var(--fs-S);
   background-color: var(--clr-background-app);
-  max-width: 110rem;
   padding-inline: var(--space-app-side);
-  margin-inline: auto;
   z-index: 0;
-}
-
-.mode_wrapper {
-  border: none;
-  margin: 0;
-  padding: 0;
-  color: inherit;
-  background-color: var(--clr-background-element);
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-
-  .svgWrapper {
-    width: 1rem;
-    @media (min-width: $breakpoint-small) {
-      width: 1.2rem;
-    }
-  }
-}
-
-.mode_wrapper:hover {
-  cursor: pointer;
-}
-
-@media (min-width: $breakpoint-small) {
 }

@@ -4,3 +4,8 @@ $breakpoint-large: 75rem;
 @mixin shadow {
   filter: drop-shadow(0px 2px 2px var(--clr-shadow-light));
 }
+
+@mixin wrapper {
+  max-width: 120rem;
+  margin-inline: auto;
+}
