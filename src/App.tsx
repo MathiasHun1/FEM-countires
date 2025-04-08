@@ -9,7 +9,8 @@ import CountriesList from './components/Pages/CountriesList';
 import CountryElement from './components/Pages/CountryElement';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useLocalStorage('theme', false);
+  const preference = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const [isDarkMode, setIsDarkMode] = useLocalStorage('theme', preference);
 
   const renderModeText = () => {
     return isDarkMode ? 'Light Mode' : 'Dark Mode';

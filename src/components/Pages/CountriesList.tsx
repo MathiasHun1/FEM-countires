@@ -60,7 +60,7 @@ const CountriesList = () => {
           </div>
           <input
             type="text"
-            name=""
+            name="search"
             id=""
             placeholder="Search for a country..."
             onChange={handleSearch}
@@ -68,7 +68,7 @@ const CountriesList = () => {
         </div>
 
         <div className={`${styles.input_wrapper} ${styles.select_input}`}>
-          <select name="" id="" onChange={handleSelect}>
+          <select name="select_region" id="" onChange={handleSelect}>
             <option value="">Filter by region</option>
             <option value="Africa">Africa</option>
             <option value="Americas">America</option>

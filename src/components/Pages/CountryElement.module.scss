@@ -1,6 +1,6 @@
 @use '../../styles/abstractions' as *;
 
-.back_button {
+.back_link {
   color: var(--clr-text);
   background-color: white;
   border-radius: 5px;
@@ -20,7 +20,7 @@
   }
 }
 
-.back_button:hover {
+.back_link:hover {
   cursor: pointer;
   font-weight: var(--fw-semi-bold);
 }
@@ -102,7 +102,7 @@
   font-weight: var(--fw-semi-bold);
 }
 
-.buttons_container {
+.links_container {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
@@ -123,6 +123,6 @@
   font-weight: var(--fw-semi-bold);
 }
 
-.button_darkmode {
+.link_darkmode {
   background-color: var(--clr-background-element);
 }

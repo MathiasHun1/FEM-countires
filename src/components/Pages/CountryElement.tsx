@@ -24,8 +24,8 @@ const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
     <>
       <Link
         to="/"
-        className={`${styles.back_button} ${
-          isDarkmode ? styles.button_darkmode : ''
+        className={`${styles.back_link} ${
+          isDarkmode ? styles.link_darkmode : ''
         }`}
       >
         <div className={styles.svg_wrapper}>
@@ -92,13 +92,13 @@ const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
             {selectedCountry.borderCountries && (
               <nav className={styles.borders_block}>
                 <p className={styles.border_text}>Border Countries: </p>
-                <div className={styles.buttons_container}>
+                <div className={styles.links_container}>
                   {selectedCountry.borderCountries.map((c) => (
                     <Link
                       to={`/${c}`}
                       key={c}
                       className={`${styles.country_link} ${
-                        isDarkmode ? styles.button_darkmode : ''
+                        isDarkmode ? styles.link_darkmode : ''
                       }`}
                     >
                       {c}
