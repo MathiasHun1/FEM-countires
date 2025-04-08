@@ -5,7 +5,7 @@ import sevices from '../../services/countryService';
 import styles from './CountryElement.module.scss';
 import backSVG from '../../assets/back.svg';
 
-const CountryElement = () => {
+const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
   const [selectedCountry, setSelectedCountry] =
     useState<CountryExtended | null>(null);
   const { country } = useParams();
@@ -22,7 +22,12 @@ const CountryElement = () => {
 
   return (
     <>
-      <Link to="/" className={styles.back_button}>
+      <Link
+        to="/"
+        className={`${styles.back_button} ${
+          isDarkmode ? styles.button_darkmode : ''
+        }`}
+      >
         <div className={styles.svg_wrapper}>
           <img src={backSVG} alt="" />
         </div>
@@ -89,7 +94,13 @@ const CountryElement = () => {
                 <p className={styles.border_text}>Border Countries: </p>
                 <div className={styles.buttons_container}>
                   {selectedCountry.borderCountries.map((c) => (
-                    <Link to={`/${c}`} key={c} className={styles.country_link}>
+                    <Link
+                      to={`/${c}`}
+                      key={c}
+                      className={`${styles.country_link} ${
+                        isDarkmode ? styles.button_darkmode : ''
+                      }`}
+                    >
                       {c}
                     </Link>
                   ))}
