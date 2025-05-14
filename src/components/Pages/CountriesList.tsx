@@ -62,7 +62,7 @@ const CountriesList = () => {
     const height = window.scrollY + window.innerHeight;
     const docHeight = document.body.scrollHeight;
 
-    if (height >= docHeight) {
+    if (height >= docHeight - 10) {
       setRenderCount((prev) => prev + 4);
     }
   };
