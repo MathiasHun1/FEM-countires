@@ -16,7 +16,7 @@ const getAll = async () => {
   }
 };
 
-const getAllFiltered = async () => {
+const getAllCountriesBasic = async () => {
   try {
     const response = await axios.get(`${baseUrl}/all`);
     const result = response.data;
@@ -92,4 +92,4 @@ const findByName = async (name: string) => {
   }
 };
 
-export default { getAll, getAllFiltered, findByName };
+export default { getAll, getAllCountriesBasic, findByName };

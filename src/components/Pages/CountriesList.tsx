@@ -15,11 +15,11 @@ const CountriesList = () => {
   const [countriesToRender, setCountriesToRender] = useState<
     CountryBase[] | null
   >(null);
-  const [renderCount, setRenderCount] = useState<number>(10);
+  const [renderCount, setRenderCount] = useState<number>(8);
 
   useEffect(() => {
     try {
-      services.getAllFiltered().then((res) => setCountries(res));
+      services.getAllCountriesBasic().then((res) => setCountries(res));
       setIsError(false);
     } catch (error) {
       setIsError(true);
@@ -30,16 +30,17 @@ const CountriesList = () => {
   useEffect(() => {
     const filteredByRegion = filterByRegion(countries, filterRegion);
     const filtered = filterByName(filteredByRegion, filterText);
-
     if (!filtered) {
       return setCountriesToRender(null);
     }
-    setCountriesToRender(filtered);
+
+    //sorting the filtered countries
+    const sorted = filtered.sort((a, b) => a.name.localeCompare(b.name));
+    setCountriesToRender(sorted);
   }, [filterText, filterRegion, countries]);
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-
     return () => window.removeEventListener('scroll', handleScroll);
   }, [countries]);
 
@@ -62,7 +63,7 @@ const CountriesList = () => {
     const docHeight = document.body.scrollHeight;
 
     if (height >= docHeight) {
-      setRenderCount((prev) => prev + 5);
+      setRenderCount((prev) => prev + 4);
     }
   };
 
@@ -78,10 +79,6 @@ const CountriesList = () => {
     hidden: { opacity: 0 },
     show: {
       opacity: 1,
-      transition: {
-        when: 'beforeChildren',
-        staggerChildren: 0.1,
-      },
     },
   };
 
@@ -147,14 +144,6 @@ const CountriesList = () => {
               );
             }
           })}
-
-          {/* {countriesToRender.map((c, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              style={{ height: '100px', width: '100px', background: 'red' }}
-            ></motion.div>
-          ))} */}
         </motion.div>
       </>
     );

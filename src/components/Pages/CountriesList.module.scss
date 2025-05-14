@@ -1,6 +1,8 @@
 @use '../../styles/abstractions' as *;
 
 .input_section {
+  max-width: 90rem;
+  margin-inline: auto;
   padding-block: 3rem;
   background-color: var(--clr-background-app);
   display: flex;
@@ -68,7 +70,10 @@
   gap: 40px;
 
   @media (min-width: $breakpoint-small) {
+    max-width: 90rem;
+    margin-inline: auto;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 74px;
+    padding-bottom: 10rem;
   }
 }
