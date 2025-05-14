@@ -126,13 +126,17 @@ const CountriesList = () => {
           variants={containerVariant}
           initial="hidden"
           animate="show"
-          transition={{ delay: 0.05 }}
+          transition={{ delay: 0.5 }}
           key={countriesToRender ? 'loaded' : 'loading'}
         >
           {countriesToRender.map((c, index) => {
             if (index < renderCount) {
               return (
-                <motion.div variants={itemVariants} key={index}>
+                <motion.div
+                  variants={itemVariants}
+                  key={index}
+                  transition={{ delay: 0.2 }}
+                >
                   <Card
                     key={c.name}
                     name={c.name}
