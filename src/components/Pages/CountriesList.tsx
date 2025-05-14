@@ -1,5 +1,5 @@
 import styles from './CountriesList.module.scss';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import services from '../../services/countryService';
 import { CountryBase } from '../../types';
 import { filterByRegion, filterByName } from '../../utils';
@@ -133,7 +133,7 @@ const CountriesList = () => {
               return (
                 <motion.div variants={itemVariants} key={index}>
                   <Card
-                    key={index}
+                    key={c.name}
                     name={c.name}
                     population={c.population}
                     region={c.region}
