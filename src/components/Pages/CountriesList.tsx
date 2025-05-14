@@ -1,5 +1,5 @@
 import styles from './CountriesList.module.scss';
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import services from '../../services/countryService';
 import { CountryBase } from '../../types';
 import { filterByRegion, filterByName } from '../../utils';
@@ -126,6 +126,7 @@ const CountriesList = () => {
           variants={containerVariant}
           initial="hidden"
           animate="show"
+          transition={{ delay: 0.05 }}
           key={countriesToRender ? 'loaded' : 'loading'}
         >
           {countriesToRender.map((c, index) => {
