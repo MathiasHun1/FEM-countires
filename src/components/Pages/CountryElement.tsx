@@ -4,6 +4,7 @@ import { useState, useEffect, Fragment } from 'react';
 import sevices from '../../services/countryService';
 import styles from './CountryElement.module.scss';
 import backSVG from '../../assets/back.svg';
+import { motion } from 'motion/react';
 
 const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
   const [selectedCountry, setSelectedCountry] =
@@ -21,7 +22,12 @@ const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
   }
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      key={country}
+    >
       <Link
         to="/"
         className={`${styles.back_link} ${
@@ -37,11 +43,21 @@ const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
       {!selectedCountry && <div>Loading...</div>}
       {selectedCountry && (
         <div className={styles.content_wrapper}>
-          <div className={styles.flag_wrapper}>
+          <motion.div
+            className={styles.flag_wrapper}
+            initial={{ x: -50 }}
+            animate={{ x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <img src={selectedCountry.flagImage} alt="" />
-          </div>
+          </motion.div>
 
-          <div className={styles.text_section}>
+          <motion.div
+            className={styles.text_section}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             <h2 className={styles.name}>{selectedCountry.name}</h2>
             <div className={styles.block_container}>
               <ul>
@@ -107,10 +123,10 @@ const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
                 </div>
               </nav>
             )}
-          </div>
+          </motion.div>
         </div>
       )}
-    </>
+    </motion.div>
   );
 };
 

@@ -86,7 +86,7 @@ const CountriesList = () => {
     return <div>Loading...</div>;
   } else {
     return (
-      <>
+      <motion.div>
         <div className={styles.input_section}>
           <div className={`${styles.input_wrapper} ${styles.text_input}`}>
             <div className={styles.icon_wrapper}>
@@ -150,7 +150,7 @@ const CountriesList = () => {
             }
           })}
         </motion.div>
-      </>
+      </motion.div>
     );
   }
 };
