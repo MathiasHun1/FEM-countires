@@ -3,6 +3,9 @@ import { CountryBase, CountryExtended } from '../types';
 
 const baseUrl = 'https://restcountries.com/v3.1';
 
+// ----- TODO ------//
+// Make the fetched data type-safe at runtime, using a runtime validation library
+
 const getAll = async () => {
   try {
     const response = await axios.get(`${baseUrl}/all`);
@@ -67,7 +70,7 @@ const findByName = async (name: string) => {
         borderCountries.push(found.name.common);
       });
     }
-
+    // have to use assertions, because the fetched data is not known in compile-time
     const data: CountryExtended = {
       name: selected.name.common as string,
       population: selected.population as number,

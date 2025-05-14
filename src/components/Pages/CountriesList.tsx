@@ -4,22 +4,41 @@ import services from '../../services/countryService';
 import { CountryBase } from '../../types';
 import { filterByRegion, filterByName } from '../../utils';
 
+import { motion, AnimatePresence } from 'motion/react';
 import Card from '../Card';
 
 const CountriesList = () => {
   const [countries, setCountries] = useState<CountryBase[] | null>(null);
   const [filterText, setFilterText] = useState('');
-  const [filterOption, setFilterOption] = useState('');
+  const [filterRegion, setFilterRegion] = useState('');
   const [isError, setIsError] = useState<boolean | null>(null);
+  const [countriesToRender, setCountriesToRender] = useState<CountryBase[]>([]);
+  const [renderCount, setRenderCount] = useState<number>(10);
 
   useEffect(() => {
     try {
       services.getAllFiltered().then((res) => setCountries(res));
       setIsError(false);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setIsError(true);
+      console.error(error);
     }
+  }, []);
+
+  useEffect(() => {
+    const filteredByRegion = filterByRegion(countries, filterRegion);
+    const filtered = filterByName(filteredByRegion, filterText);
+
+    if (!filtered) {
+      return setCountriesToRender([]);
+    }
+    setCountriesToRender(filtered);
+  }, [filterText, filterRegion, countries]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,29 +48,63 @@ const CountriesList = () => {
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { target } = e;
-    setFilterOption(target.value);
-  };
-
-  const renderCountries = () => {
-    const filteredByRegion = filterByRegion(countries, filterOption);
-    const filtered = filterByName(filteredByRegion, filterText);
-
-    if (!filtered) return;
-
-    return filtered.map((c) => (
-      <Card
-        key={c.name}
-        name={c.name}
-        population={c.population}
-        region={c.region}
-        capital={c.capital}
-        flagImage={c.flagImage}
-      />
-    ));
+    setFilterRegion(target.value);
   };
 
   if (isError) {
     return <p>Error happened in loading data</p>;
+  }
+
+  const handleScroll = () => {
+    const height = window.scrollY + window.innerHeight;
+    const docHeight = document.body.scrollHeight;
+
+    if (height >= docHeight) {
+      setRenderCount((prev) => prev + 5);
+    }
+  };
+
+  const renderCountries = () => {
+    return countriesToRender.map((c, index) => {
+      if (index < renderCount) {
+        return (
+          <motion.div variants={itemVariants} key={c.name}>
+            <Card
+              name={c.name}
+              population={c.population}
+              region={c.region}
+              capital={c.capital}
+              flagImage={c.flagImage}
+            />
+          </motion.div>
+        );
+      }
+    });
+  };
+  const itemVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1 },
+    transition: {
+      duration: 0.5, // Makes the animation more visible
+    },
+  };
+
+  const containerVariant = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        when: 'beforeChildren',
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const MotionCard = motion.create(Card);
+  const array = Array(120).fill(1);
+
+  if (!countriesToRender) {
+    return <div>Loading...</div>;
   }
 
   return (
@@ -90,10 +143,36 @@ const CountriesList = () => {
         </div>
       </div>
 
-      <div className={styles.cards_container}>
-        {!countries && <div>Loading...</div>}
-        {countries && renderCountries()}
-      </div>
+      <motion.div
+        className={styles.cards_container}
+        variants={containerVariant}
+        initial="hidden"
+        animate="show"
+      >
+        {/* {countriesToRender.map((c, index) => {
+          if (index < renderCount) {
+            return (
+              <MotionCard
+                key={index}
+                variants={itemVariants}
+                name={c.name}
+                population={c.population}
+                region={c.region}
+                capital={c.capital}
+                flagImage={c.flagImage}
+              />
+            );
+          }
+        })} */}
+
+        {countriesToRender.map((c, index) => (
+          <motion.div
+            key={index}
+            variants={itemVariants}
+            style={{ height: '100px', width: '100px', background: 'red' }}
+          ></motion.div>
+        ))}
+      </motion.div>
     </>
   );
 };
