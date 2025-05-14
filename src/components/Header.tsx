@@ -2,7 +2,7 @@ import styles from './Header.module.scss';
 import { flushSync } from 'react-dom';
 import lightmodeSVG from '../assets/lightMode.svg';
 import darkmodeSVG from '../assets/darkMode.svg';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 
 interface Props {
   isDarkMode: boolean;
