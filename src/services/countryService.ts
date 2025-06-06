@@ -32,6 +32,8 @@ const getAllCountriesBasic = async () => {
     });
     return filteredRes;
   } catch (error) {
+    console.log('RUNS IN UTILITY');
+
     console.error(`Error happened while fetching data: ${error}`);
     throw new Error('Failed to fetch data');
   }

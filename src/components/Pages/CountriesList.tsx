@@ -18,13 +18,16 @@ const CountriesList = () => {
   const [renderCount, setRenderCount] = useState<number>(8);
 
   useEffect(() => {
-    try {
-      services.getAllCountriesBasic().then((res) => setCountries(res));
-      setIsError(false);
-    } catch (error) {
-      setIsError(true);
-      console.error(error);
-    }
+    services
+      .getAllCountriesBasic()
+      .then((res) => {
+        setCountries(res);
+        setIsError(false);
+      })
+      .catch((error) => {
+        setIsError(true);
+        console.error(error);
+      });
   }, []);
 
   useEffect(() => {
@@ -55,7 +58,15 @@ const CountriesList = () => {
   };
 
   if (isError) {
-    return <p>Error happened in loading data</p>;
+    return (
+      <>
+        <p>Error happened in loading data</p>
+        <p>
+          UPDATE: The free API I'm using is unreliable, so I will write my own
+          backend to this app. Until this it will not work
+        </p>
+      </>
+    );
   }
 
   const handleScroll = () => {
