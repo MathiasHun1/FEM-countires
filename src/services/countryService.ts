@@ -37,8 +37,6 @@ const getCountryByName = async (name: string) => {
     const currencyKeys = Object.keys(country.currencies);
     const nativeNameKey = Object.keys(country.name.nativeName)[0];
 
-    console.log(currencyKeys);
-
     return {
       name: country.name.common as string,
       population: country.population as number,
@@ -56,6 +54,7 @@ const getCountryByName = async (name: string) => {
     };
   } catch (error) {
     console.error(error);
+    return null;
   }
 };
 
