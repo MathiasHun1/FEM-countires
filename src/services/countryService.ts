@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CountryBase, CountryExtended } from '../types';
+import { CountryBase } from '../types';
 
 const baseUrl = 'https://restcountries.com/v3.1';
 
@@ -18,8 +18,12 @@ const getAll = async () => {
 
 const getAllCountriesBasic = async () => {
   try {
-    const response = await axios.get(`${baseUrl}/all`);
+    const response = await axios.get(
+      `${baseUrl}/all?fields=name,population,region,capital,flags`
+    );
     const result = response.data;
+
+    console.log('Data from the utility: ', result);
 
     const filteredRes = result.map((country: any): CountryBase => {
       return {
@@ -32,66 +36,39 @@ const getAllCountriesBasic = async () => {
     });
     return filteredRes;
   } catch (error) {
-    console.log('RUNS IN UTILITY');
-
     console.error(`Error happened while fetching data: ${error}`);
     throw new Error('Failed to fetch data');
   }
 };
 
-const findByName = async (name: string) => {
+const getByName = async (name: string) => {
   try {
-    const response = await axios.get(`${baseUrl}/all`); // all countries, because the other API paths are unreliable
-    const result = response.data;
+    const result = await axios.get(`${baseUrl}/name/${name}`);
+    const country = result.data[0];
 
-    //find a country by its common name
-    const selected = result.find(
-      (country: any) => country.name.common === name
-    );
-    const currencies: string[] = [];
-    const languages: string[] = [];
-    const nativeNameValues: any =
-      Object.values(selected.name?.nativeName ?? {})[0] || null;
-    const nativeName: string = nativeNameValues
-      ? nativeNameValues.common
-      : null;
+    const currencyKeys = Object.keys(country.currencies);
+    const nativeNameKey = Object.keys(country.name.nativeName)[0];
 
-    for (const currency in selected.currencies) {
-      currencies.push(selected.currencies[currency].name);
-    }
+    console.log(currencyKeys);
 
-    for (const lang in selected.languages) {
-      languages.push(selected.languages[lang]);
-    }
-
-    // find the selected country's neighbours by cca3 codes:
-    const borderCountries: string[] = [];
-    if (selected.borders) {
-      selected.borders.map((cca3: string) => {
-        const found = result.find((c: any) => c.cca3 === cca3);
-        borderCountries.push(found.name.common);
-      });
-    }
-    // have to use assertions, because the fetched data is not known in compile-time
-    const data: CountryExtended = {
-      name: selected.name.common as string,
-      population: selected.population as number,
-      region: selected.region as string,
-      capital: selected.capital as string,
-      flagImage: selected.flags.svg as string,
-      nativeName: nativeName as string | undefined,
-      subregion: selected.subregion as string | undefined,
-      domain: selected.tld as string,
-      currencies: currencies as string[],
-      languages: languages as string[],
-      borderCountries: borderCountries as string[] | undefined,
+    return {
+      name: country.name.common as string,
+      population: country.population as number,
+      region: country.region as string,
+      capital: country.capital as string,
+      flagImage: country.flags.svg as string,
+      nativeName: country.name.nativeName[nativeNameKey].common as
+        | string
+        | undefined,
+      subregion: country.subregion as string | undefined,
+      domain: country.tld as string,
+      currencies: currencyKeys as string[],
+      languages: Object.values(country.languages) as string[],
+      borderCountries: country.borderCountries as string[] | undefined,
     };
-
-    return selected ? data : null;
   } catch (error) {
-    console.error(`Error happened while fetching data: ${error}`);
-    throw new Error('Failed to fetch data');
+    console.error(error);
   }
 };
 
-export default { getAll, getAllCountriesBasic, findByName };
+export default { getAll, getAllCountriesBasic, getByName };

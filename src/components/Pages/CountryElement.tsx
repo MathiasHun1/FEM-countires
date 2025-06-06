@@ -13,7 +13,7 @@ const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
 
   useEffect(() => {
     if (country) {
-      sevices.findByName(country).then((res) => setSelectedCountry(res));
+      sevices.getByName(country).then((res) => setSelectedCountry(res));
     }
   }, [country]);
 
@@ -92,9 +92,10 @@ const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
                 </li>
                 <li>
                   <span>Currencies: </span>
-                  {selectedCountry.currencies.map((c) => (
-                    <Fragment key={c}>{c}</Fragment>
-                  ))}
+                  {selectedCountry.currencies &&
+                    selectedCountry.currencies.map((c) => (
+                      <Fragment key={c}>{c}</Fragment>
+                    ))}
                 </li>
                 <li>
                   <span>Languages: </span>
