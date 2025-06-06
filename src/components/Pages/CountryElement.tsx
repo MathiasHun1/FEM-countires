@@ -13,7 +13,7 @@ const CountryElement = ({ isDarkmode }: { isDarkmode: boolean }) => {
 
   useEffect(() => {
     if (country) {
-      sevices.getByName(country).then((res) => setSelectedCountry(res));
+      sevices.getCountryByName(country).then((res) => setSelectedCountry(res));
     }
   }, [country]);
 

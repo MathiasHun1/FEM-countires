@@ -6,42 +6,30 @@ const baseUrl = 'https://restcountries.com/v3.1';
 // ----- TODO ------//
 // Make the fetched data type-safe at runtime, using a runtime validation library
 
-const getAll = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/all`);
-    return response.data;
-  } catch (error) {
-    console.error(`Error happened while fetching data: ${error}`);
-    throw new Error('Failed to fetch data');
-  }
-};
-
-const getAllCountriesBasic = async () => {
+const getAllCountries = async () => {
   try {
     const response = await axios.get(
       `${baseUrl}/all?fields=name,population,region,capital,flags`
     );
     const result = response.data;
 
-    console.log('Data from the utility: ', result);
-
-    const filteredRes = result.map((country: any): CountryBase => {
-      return {
+    const formedResult = result.map(
+      (country: any): CountryBase => ({
         name: country.name.common as string,
         population: country.population as number,
         region: country.region as string,
         capital: country.capital as string,
         flagImage: country.flags.svg as string,
-      };
-    });
-    return filteredRes;
+      })
+    );
+    return formedResult;
   } catch (error) {
     console.error(`Error happened while fetching data: ${error}`);
     throw new Error('Failed to fetch data');
   }
 };
 
-const getByName = async (name: string) => {
+const getCountryByName = async (name: string) => {
   try {
     const result = await axios.get(`${baseUrl}/name/${name}`);
     const country = result.data[0];
@@ -71,4 +59,4 @@ const getByName = async (name: string) => {
   }
 };
 
-export default { getAll, getAllCountriesBasic, getByName };
+export default { getAllCountries, getCountryByName };

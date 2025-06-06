@@ -1,29 +1,25 @@
 import { CountryBase } from './types';
 
-export const filterByName = (
-  countries: CountryBase[] | undefined,
-  filterText: string
-) => {
-  if (!countries) return;
-
-  if (filterText === '') {
-    return countries;
+export const filterCountries = (
+  data: CountryBase[] | null,
+  regionFilterText = '',
+  nameFilterText = ''
+): CountryBase[] | null => {
+  if (!data) {
+    return null;
   }
-  const result = countries.filter((c) =>
-    c.name.toLocaleLowerCase().includes(filterText.toLowerCase())
-  );
-  return result;
-};
 
-export const filterByRegion = (
-  countries: CountryBase[] | null,
-  region: string
-): CountryBase[] | undefined => {
-  if (!countries) return;
+  let result = data;
 
-  if (region === '') {
-    return countries;
+  if (regionFilterText) {
+    result = result.filter((c) => c.region === regionFilterText);
   }
-  const result = countries.filter((c) => c.region === region);
-  return result;
+
+  if (nameFilterText) {
+    result = result.filter((c) =>
+      c.name.toLocaleLowerCase().includes(nameFilterText.toLowerCase())
+    );
+  }
+
+  return result.sort((a, b) => a.name.localeCompare(b.name)); //return countries sorted by name
 };
